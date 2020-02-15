@@ -1,4 +1,4 @@
-package com.galo.andromeda;
+package com.galo.Kart;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

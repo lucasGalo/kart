@@ -1,4 +1,4 @@
-package com.galo.andromeda;
+package com.galo.Kart;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

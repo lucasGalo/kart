@@ -1,4 +1,4 @@
-package com.galo.andromeda;
+package com.galo.Kart;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
