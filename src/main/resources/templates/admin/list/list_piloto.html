@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+<div layout:fragment="header">
+    <h1>
+        <span th:text="${FORM_OBJECT_NAME}"></span>
+        <small>Consulta</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a th:href="@{/}"><i class="fa fa-home"></i>Home</a></li>
+        <li class="active" th:text="${FRM}"></li>
+    </ol>
+</div>
+<div class="container">
+    <div layout:fragment="content">
+        <div th:if="${message}"
+             th:class="${'alert ' + alertClass + ' alert-dismissible'}">
+            <button type="button" class="close" data-dismiss="alert"
+                    aria-hidden="true">×
+            </button>
+            <h4>
+                <i class="icon fa fa-info"></i>
+            </h4>
+            <div th:text="${message}"/>
+        </div>
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title" th:text="${FRM}"></h3>
+                <a type="button" class="btn btn-success btn-sm pull-right"
+                   data-placement="top" title="novo"
+                   th:href="@{/piloto/novo}"><i class="fa fa-plus"></i></a>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="list" class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>N° Piloto</th>
+                        <th class="text-center">Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${pilotos.empty}">
+                        <td colspan="8"> Não há dados para listar!</td>
+                    </tr>
+                    <tr th:each="piloto : ${pilotos}">
+                        <td><span th:text="${piloto.nome}">  </span></td>
+                        <td><span th:text="${piloto.nroPiloto}">  </span></td>
+                        <td class="btn-group-sm text-center">
+                            <a type="button" class="btn btn-info"
+                               th:href="@{/piloto/editar(id=${piloto.id})}">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a type="button" class="btn btn-danger"
+                               th:href="@{/piloto/remover(id=${piloto.id})}">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+<div layout:fragment="script">
+    <script type="text/javascript">
+        confTabelaSimples($("#list"), "Piloto");
+    </script>
+</div>
+</body>
+</html>

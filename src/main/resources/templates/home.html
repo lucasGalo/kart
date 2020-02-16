@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Kart-fash</title>
+    <title>KART - FASH</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
-<p>Inicio Projeto</p>
+<div layout:fragment="header">
+    <h1>
+        <span text="Seja bem vindo"></span>
+        <small>Descrição do sistema</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a th:href="@{/}"><i class="fa fa-home"></i>Home</a></li>
+        <li class="active" text="-"></li>
+    </ol>
+</div>
+<div class="container">
+    <div layout:fragment="content">
+        <div th:if="${message}"
+             th:class="${'alert ' + alertClass + ' alert-dismissible'}">
+            <button type="button" class="close" data-dismiss="alert"
+                    aria-hidden="true">×
+            </button>
+            <h4>
+                <i class="icon fa fa-info"></i>
+            </h4>
+            <div th:text="${message}"/>
+        </div>
+        <div class="box">
+            <!-- /.box-header -->
+            <div class="box-body">
+               <h3> Bem vindo ao sistema - Kart - fash</h3>
+
+                <br/>
+
+                <p>O sistema é composto por 4 páginas:</p>
+                <ul style="list-style-type: none;">
+                    <li>1 - Logs, lista todos os logs cadastrado no sistema.</li>
+                    <li>2 - Pilotos, lista todos os Pilotos.</li>
+                    <li>3 - importar arquivo de log.</li>
+                    <li>4 - Exibir os resultados da corrida.</li>
+                </ul>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
 </body>
 </html>

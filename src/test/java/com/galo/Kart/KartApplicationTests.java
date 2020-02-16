@@ -16,13 +16,14 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
+
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -59,7 +60,7 @@ public class KartApplicationTests {
         assertThat(piloto.getNroPiloto()).isEqualTo(1);
         assertThat(piloto.getNome()).isEqualTo("Lucas");
 
-        Log log = new Log(30.00, new Date(), 1, piloto, new Date());
+        Log log = new Log(30.00, LocalTime.of(1,20,32), 1, piloto, LocalTime.of(2,20,32));
 
         this.logDAO.save(log);
 
@@ -75,5 +76,4 @@ public class KartApplicationTests {
         assertNotNull(result);
         assertNotNull(listaPiloto);
     }
-
 }

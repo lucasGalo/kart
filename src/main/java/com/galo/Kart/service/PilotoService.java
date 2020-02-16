@@ -4,10 +4,11 @@ import com.galo.Kart.DAO.PilotoDAO;
 import com.galo.Kart.models.Piloto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
-public class PilotoService{
+public class PilotoService {
 
     @Autowired
     private PilotoDAO pilotoDAO;
@@ -30,5 +31,9 @@ public class PilotoService{
 
     public Piloto save(Piloto piloto) {
         return pilotoDAO.save(piloto);
+    }
+
+    public Piloto findByNroPiloto(int nroNumero) {
+        return pilotoDAO.findByNroPiloto(nroNumero);
     }
 }

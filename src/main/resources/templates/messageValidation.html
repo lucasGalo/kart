@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<body>
+<div class="alert alert-success alert-dismissible" rola="alert" th:if="${not #strings.isEmpty(message)}">
+    <span th:text="${message}"></span>
+</div>
+</body>
+</html>

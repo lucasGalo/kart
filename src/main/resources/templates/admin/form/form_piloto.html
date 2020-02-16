@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>XPTO - Systens</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+<div layout:fragment="header">
+    <h1>
+        <span th:text="${FORM_OBJECT_NAME}"></span>
+        <small th:if="${piloto.persistido} ? TITLE_EDIT : TITLE_NEW"></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a th:href="@{/}"><i class="fa fa-home"></i> </a></li>
+        <li class="active" th:text="${FRM}"></li>
+    </ol>
+</div>
+
+<div class="container">
+    <div layout:fragment="content">
+        <div th:if="${message}"
+             th:class="${'alert ' + alertClass + ' alert-dismissible'}">
+            <button type="button" class="close" data-dismiss="alert"
+                    aria-hidden="true">×
+            </button>
+            <h4>
+                <i class="icon fa fa-info"></i>
+            </h4>
+            <div th:text="${message}"/>
+        </div>
+        <form role="form"
+              th:action="${piloto.persistido} ? @{/piloto/editar} : @{/piloto/novo}"
+              method="post" th:object="${piloto}">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title" th:text="${FRM}"></h3>
+
+                    <div class="margin pull-right">
+                        <button type="submit" class="btn btn-info" data-placement="top" title="salvar e retornar">
+                            <i class="fa fa-save"></i>
+                        </button>
+                        <a type="button" class="btn btn-warning" th:href="@{/piloto/list}"
+                           data-placement="top" title="retornar">
+                            <i class="fa fa-mail-reply"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <input type="hidden" th:field="*{id}">
+
+                    <div class="form-group col-md-6">
+                        <label for="inputNpiloto">N° Piloto</label>
+                        <input type="text" class="form-control" id="inputNpiloto" placeholder="Informe n° piloto"
+                               th:field="*{nroPiloto}" required/>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputNome">Nome</label>
+                        <input type="text" class="form-control" id="inputNome" placeholder="Informe o nome"
+                               th:field="*{nome}" required/>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer"></div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

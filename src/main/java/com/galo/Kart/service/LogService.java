@@ -2,9 +2,11 @@ package com.galo.Kart.service;
 
 import com.galo.Kart.DAO.LogDAO;
 import com.galo.Kart.models.Log;
+import com.galo.Kart.models.Piloto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -30,4 +32,14 @@ public class LogService {
     public Log save(Log log) {
         return logDAO.save(log);
     }
+
+    public Log findByNroVoltaAndPiloto(int nroVolta, Piloto piloto) {
+        return logDAO.findByNroVoltaAndPiloto(nroVolta, piloto);
+    }
+
+    public List<String> resultadoCorrida() { return logDAO.resultadoCorrida(); }
+
+
+
+
 }

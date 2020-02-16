@@ -1,6 +1,5 @@
 package com.galo.Kart.controllers;
 
-
 import com.galo.Kart.util.ToastrUtil;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -124,8 +123,8 @@ public class Base<T> {
         ModelAndView modelAndView = new ModelAndView(URL_FORM);
         modelAndView.addObject("FRM", TITLE_NEW);
         modelAndView.addObject(SINGLE_OBJECT, object);
-        //modelAndView.addObject("message", ToastrUtil.errorMessage(message) );
-        modelAndView.addObject("message", message);
+        modelAndView.addObject("message", ToastrUtil.errorMessage(message) );
+        //modelAndView.addObject("message", message);
         modelAndView.addObject("alertClass", "alert-danger");
         return modelAndView;
     }
