@@ -18,7 +18,7 @@ public interface LogDAO extends CrudRepository<Log, Integer> {
     Log findByNroVoltaAndPiloto(int nroVolta, Piloto piloto);
 
     @Query( value = " " +
-            "    select ROW_NUMBER() OVER (ORDER BY piloto) ||';'|| p.nropiloto||';'||p.nome||';'|| d.nrovolta||';'||d.tempovolta||';'||(d.velocidademedia / d.nrovolta)||';'||d.melhorVolta  " +
+            "    select ROW_NUMBER() OVER (ORDER BY piloto) ||';'|| p.nropiloto||';'||p.nome||';'|| d.nrovolta||';'||d.tempovolta||';'||d.velocidademedia||';'||d.melhorVolta  " +
             "from  " +
             "    ( SELECT a.piloto,  " +
             "        (SELECT max(b.nrovolta)  " +
@@ -29,7 +29,7 @@ public interface LogDAO extends CrudRepository<Log, Integer> {
             "            FROM log c  " +
             "            WHERE c.piloto = a.piloto  " +
             "            ) AS tempovolta,  " +
-            "            (SELECT sum(h.velocidademedia)  " +
+            "            (SELECT avg(h.velocidademedia)  " +
             "            FROM log h  " +
             "            WHERE h.piloto = a.piloto  " +
             "            ) AS velocidademedia,  " +
