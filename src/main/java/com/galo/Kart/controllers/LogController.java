@@ -4,7 +4,6 @@ import com.galo.Kart.models.Log;
 import com.galo.Kart.models.Piloto;
 import com.galo.Kart.service.LogService;
 import com.galo.Kart.service.PilotoService;
-import com.galo.Kart.util.ToastrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +17,14 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -113,7 +119,6 @@ public class LogController extends Base<Log> {
         String linha = "";
 
         String SeparadorCampo = "\\s+";
-
         try {
             conteudo = new BufferedReader(new InputStreamReader(file.getInputStream()));
             while ((linha = conteudo.readLine()) != null) {
@@ -163,22 +168,31 @@ public class LogController extends Base<Log> {
         this.listaLog = null;
     }
 
-    public LocalTime stringParaLocalTime(String str) {
-        if (str != null) {
-            String SeparadorCampo = ":";
-            String format = str.replace(".", ":");
-            String[] campo = format.split(SeparadorCampo);
-            LocalTime localTime;
-            if (campo.length < 4) {
-                localTime = LocalTime.of(0, Integer.parseInt(campo[0]), Integer.parseInt(campo[1]), Integer.parseInt(campo[2]));
-            } else {
-                localTime = LocalTime.of(Integer.parseInt(campo[0]), Integer.parseInt(campo[1]), Integer.parseInt(campo[2]), Integer.parseInt(campo[3]));
+    public Timestamp stringParaLocalTime(String str) {
+        try {
+            Date date = new Date();
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+
+            System.out.println(formato.format(calendar.getTime()));
+            if(str.length()< 12){
+                str = "00:0"+str;
             }
 
-            return localTime;
-        } else
-            return null;
+            String ti = formato.format(calendar.getTime()) +" " + str;
 
+            Timestamp ts;
+            if (str != null) {
+                ts = Timestamp.valueOf(ti);
+                return ts;
+            } else
+                return null;
+        } catch (Exception e) {
+
+        }
+        return null;
     }
 
 }

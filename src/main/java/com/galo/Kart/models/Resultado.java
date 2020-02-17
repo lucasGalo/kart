@@ -6,13 +6,14 @@ public class Resultado {
 
     public Resultado() {}
 
-    public Resultado(String posicao, String pilotoCodigo, String pilotoNome, String qtdVoltas, String tempo, String velocidadeMedia) {
+    public Resultado(String posicao, String pilotoCodigo, String pilotoNome, String qtdVoltas, String tempo, String velocidadeMedia, String melhorVolta) {
         this.posicao = posicao;
         this.pilotoCodigo = pilotoCodigo;
         this.pilotoNome = pilotoNome;
         this.qtdVoltas = qtdVoltas;
         this.tempo = tempo;
         this.velocidadeMedia = velocidadeMedia;
+        this.melhorVolta = melhorVolta;
     }
 
     private String posicao;
@@ -26,6 +27,7 @@ public class Resultado {
     private String tempo;
 
     private String velocidadeMedia;
+    private String melhorVolta;
 
     public String getPosicao() {
         return posicao;
@@ -73,5 +75,13 @@ public class Resultado {
 
     public void setVelocidadeMedia(String velocidadeMedia) {
         this.velocidadeMedia = velocidadeMedia;
+    }
+
+    public String getMelhorVolta() {
+        return melhorVolta;
+    }
+
+    public void setMelhorVolta(String melhorVolta) {
+        this.melhorVolta = melhorVolta;
     }
 }

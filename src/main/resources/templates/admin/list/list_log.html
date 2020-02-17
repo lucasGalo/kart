@@ -65,9 +65,10 @@
                         </td>
 
                         <td><span th:text="${#numbers.formatDecimal(log.velocidadeMedia, 0, 'POINT', 3, 'COMMA')}"></span></td>
-                        <td><span th:text="${log.tempoVolta}">  </span></td>
+
+                        <td><span th:text="${#dates.format(log.tempoVolta, 'HH:mm:ss.SSS')}">  </span></td>
                         <td><span th:text="${log.nroVolta}"></span></td>
-                        <td><span th:text="${log.hora}"></span></td>
+                        <td><span th:text="${#dates.format(log.hora, 'HH:mm:ss.SSS')}"></span></td>
 
 
                         <td class="btn-group-sm text-center">

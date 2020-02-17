@@ -1,6 +1,7 @@
 package com.galo.Kart.models;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalTime;
 
 
@@ -10,7 +11,7 @@ public class Log extends EntityBase {
 
     public Log() {}
 
-    public Log(double velocidadeMedia, LocalTime tempoVolta, int nroVolta, Piloto piloto, LocalTime hora) {
+    public Log(double velocidadeMedia, Timestamp tempoVolta, int nroVolta, Piloto piloto, Timestamp hora) {
         this.velocidadeMedia = velocidadeMedia;
         this.tempoVolta = tempoVolta;
         this.nroVolta = nroVolta;
@@ -22,7 +23,7 @@ public class Log extends EntityBase {
     private double velocidadeMedia;
 
     @Column(name="tempovolta")
-    private LocalTime tempoVolta;
+    private Timestamp tempoVolta;
 
     @Transient
     private String tempo;
@@ -35,11 +36,10 @@ public class Log extends EntityBase {
     private Piloto piloto;
 
     @Column(name="hora")
-    private LocalTime hora;
+    private Timestamp hora;
 
     @Transient
     private String horaAux;
-
 
     public double getVelocidadeMedia() {
         return velocidadeMedia;
@@ -47,6 +47,22 @@ public class Log extends EntityBase {
 
     public void setVelocidadeMedia(double velocidadeMedia) {
         this.velocidadeMedia = velocidadeMedia;
+    }
+
+    public Timestamp getTempoVolta() {
+        return tempoVolta;
+    }
+
+    public void setTempoVolta(Timestamp tempoVolta) {
+        this.tempoVolta = tempoVolta;
+    }
+
+    public String getTempo() {
+        return tempo;
+    }
+
+    public void setTempo(String tempo) {
+        this.tempo = tempo;
     }
 
     public int getNroVolta() {
@@ -65,28 +81,12 @@ public class Log extends EntityBase {
         this.piloto = piloto;
     }
 
-    public LocalTime getTempoVolta() {
-        return tempoVolta;
-    }
-
-    public void setTempoVolta(LocalTime tempoVolta) {
-        this.tempoVolta = tempoVolta;
-    }
-
-    public LocalTime getHora() {
+    public Timestamp getHora() {
         return hora;
     }
 
-    public void setHora(LocalTime hora) {
+    public void setHora(Timestamp hora) {
         this.hora = hora;
-    }
-
-    public String getTempo() {
-        return tempo;
-    }
-
-    public void setTempo(String tempo) {
-        this.tempo = tempo;
     }
 
     public String getHoraAux() {

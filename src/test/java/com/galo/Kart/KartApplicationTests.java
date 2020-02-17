@@ -17,6 +17,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.sql.Timestamp;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
@@ -53,14 +54,15 @@ public class KartApplicationTests {
 
     @Test
     public void createLogData() {
-
+        Date data = new Date();
+        Timestamp t = new Timestamp(data.getTime());
         Piloto piloto = new Piloto(1, "Lucas");
         pilotoDAO.save(piloto);
         assertThat(piloto.getId()).isNotNull();
         assertThat(piloto.getNroPiloto()).isEqualTo(1);
         assertThat(piloto.getNome()).isEqualTo("Lucas");
 
-        Log log = new Log(30.00, LocalTime.of(1,20,32), 1, piloto, LocalTime.of(2,20,32));
+        Log log = new Log(30.00, t, 1, piloto, t);
 
         this.logDAO.save(log);
 

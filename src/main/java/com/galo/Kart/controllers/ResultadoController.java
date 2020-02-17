@@ -35,8 +35,9 @@ public class ResultadoController extends Base<Resultado> {
 
     @GetMapping("/list")
     public ModelAndView listar() {
+        String s = logService.melhorVolta();
         List<Resultado> listaResultado = populaResultado(logService.resultadoCorrida());
-        return listPage(listaResultado);
+        return listPage(listaResultado).addObject("volta", s);
     }
 
 
@@ -47,7 +48,7 @@ public class ResultadoController extends Base<Resultado> {
             lista = new ArrayList<>();
             for (String s : listaLog) {
                 String[] campo = s.split(cvsSeparadorCampo);
-                Resultado rs = new Resultado(campo[0], campo[1], campo[2], campo[3], campo[4], campo[5]);
+                Resultado rs = new Resultado(campo[0], campo[1], campo[2], campo[3], campo[4], campo[5], campo[6]);
                 lista.add(rs);
             }
             return lista;

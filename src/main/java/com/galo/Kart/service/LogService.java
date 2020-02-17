@@ -39,7 +39,6 @@ public class LogService {
 
     public List<String> resultadoCorrida() { return logDAO.resultadoCorrida(); }
 
-
-
+    public String melhorVolta(){return logDAO.melhorVolta();}
 
 }

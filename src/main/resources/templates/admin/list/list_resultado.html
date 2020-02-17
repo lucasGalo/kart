@@ -36,6 +36,13 @@
                    th:href="@{/resultado/novo}"><i class="fa fa-plus"></i></a>
             </div>
             <!-- /.box-header -->
+            <div class="form-row">
+                <div class="form-grup col-md-12">
+                    <label th:text="${volta}"></label>
+                </div>
+            </div>
+            <br/><br/>
+
             <div class="box-body">
                 <table id="list" class="table table-bordered table-hover">
                     <thead>
@@ -46,6 +53,7 @@
                         <th>Qtde Volta completadas</th>
                         <th>Tempo total da prova</th>
                         <th>Velocidade média</th>
+                        <th>Melhor volta</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -59,6 +67,7 @@
                         <td><span th:text="${resultado.qtdVoltas}"></span></td>
                         <td><span th:text="${resultado.tempo}"></span></td>
                         <td><span th:text="${#numbers.formatDecimal(resultado.velocidadeMedia, 0, 'POINT', 3, 'COMMA')}"></span></td>
+                        <td><span th:text="${resultado.melhorVolta}"></span></td>
                     </tr>
                     </tbody>
                 </table>
