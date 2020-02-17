@@ -18,30 +18,28 @@ public interface LogDAO extends CrudRepository<Log, Integer> {
     Log findByNroVoltaAndPiloto(int nroVolta, Piloto piloto);
 
     @Query( value = " " +
-            "    select ROW_NUMBER() OVER (ORDER BY piloto) ||';'|| p.nropiloto||';'||p.nome||';'|| d.nrovolta||';'||d.tempovolta||';'||d.velocidademedia||';'||d.melhorVolta  " +
-            "from  " +
-            "    ( SELECT a.piloto,  " +
-            "        (SELECT max(b.nrovolta)  " +
-            "            FROM log b  " +
-            "            WHERE b.piloto = a.piloto  " +
-            "         ) AS nrovolta,  " +
-            "        (SELECT SUM(EXTRACT (minutes from c.tempovolta))  " +
-            "            FROM log c  " +
-            "            WHERE c.piloto = a.piloto  " +
-            "            ) AS tempovolta,  " +
-            "            (SELECT avg(h.velocidademedia)  " +
-            "            FROM log h  " +
-            "            WHERE h.piloto = a.piloto  " +
-            "            ) AS velocidademedia,  " +
-            "            (select h.nrovolta   " +
-            "            from log h where h.tempovolta = (SELECT min(c.tempovolta)  " +
-            "            FROM log c  " +
-            "                WHERE c.piloto = a.piloto  " +
-            "              )) AS melhorVolta  " +
-            "    FROM log a GROUP BY a.piloto order by tempovolta,nrovolta desc) d,  " +
-            "    Piloto p  " +
-            "    where p.id = d.piloto;" +
-            "", nativeQuery = true)
+            " select ROW_NUMBER() OVER (ORDER BY piloto) ||';'|| p.nropiloto||';'||p.nome||';'|| d.nrovolta||';'||d.tempovolta||';'||d.velocidademedia||';'||d.melhorVolta    " +
+            "            from    " +
+            "                ( SELECT a.piloto,    " +
+            "                    (SELECT max(b.nrovolta)    " +
+            "                        FROM log b    " +
+            "                        WHERE b.piloto = a.piloto    " +
+            "                     ) AS nrovolta,    " +
+            "                    (SELECT sum(cast(c.tempovolta as time))   " +
+            "                        FROM log c    " +
+            "                        WHERE c.piloto = a.piloto    " +
+            "                        ) AS tempovolta,    " +
+            "                        (SELECT avg(h.velocidademedia)    " +
+            "                        FROM log h    " +
+            "                        WHERE h.piloto = a.piloto    " +
+            "                        ) AS velocidademedia,    " +
+            "                        (select h.nrovolta     " +
+            "                        from log h where h.tempovolta = (SELECT min(c.tempovolta )    " +
+            "                        FROM log c    " +
+            "                            WHERE c.piloto = a.piloto                              " +
+            "                          )) AS melhorVolta    " +
+            "                FROM log a GROUP BY a.piloto order by tempovolta,nrovolta desc) d,    " +
+            "                Piloto p  where p.id = d.piloto ", nativeQuery = true)
     List<String> resultadoCorrida();
 
 

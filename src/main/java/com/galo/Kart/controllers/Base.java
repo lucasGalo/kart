@@ -1,6 +1,8 @@
 package com.galo.Kart.controllers;
 
 import com.galo.Kart.util.ToastrUtil;
+import javassist.NotFoundException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -125,6 +127,14 @@ public class Base<T> {
         modelAndView.addObject(SINGLE_OBJECT, object);
         modelAndView.addObject("message", ToastrUtil.errorMessage(message) );
         //modelAndView.addObject("message", message);
+        modelAndView.addObject("alertClass", "alert-danger");
+        return modelAndView;
+    }
+
+    protected ModelAndView erroPageException(T object, String message) {
+        ModelAndView modelAndView = new ModelAndView("share/erro");
+        modelAndView.addObject("FRM", "Ocorreu um erro generico");
+        modelAndView.addObject("message", message);
         modelAndView.addObject("alertClass", "alert-danger");
         return modelAndView;
     }

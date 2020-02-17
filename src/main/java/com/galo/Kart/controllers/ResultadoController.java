@@ -2,8 +2,10 @@ package com.galo.Kart.controllers;
 
 import com.galo.Kart.models.Resultado;
 import com.galo.Kart.service.LogService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -54,6 +56,11 @@ public class ResultadoController extends Base<Resultado> {
             return lista;
         } else
             return new ArrayList<>();
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView errorPage() {
+        return erroPageException(null, "Erro inesperado!");
     }
 
 
